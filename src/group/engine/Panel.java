@@ -10,12 +10,19 @@ import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Paint.Style;
 import android.graphics.Rect;
 import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
 public class Panel extends SurfaceView implements SurfaceHolder.Callback {
+	/* seetings */
+	private float blockSize = 40;//40*40
+	private float offestOfMapX = 40;
+	private float offestOfMapY = 80;
+	
+	/* --------*/
 	private static Panel panel = null;
 	
 	private SurfaceHolder surfaceHolder;
@@ -57,10 +64,10 @@ public class Panel extends SurfaceView implements SurfaceHolder.Callback {
 				paint.setColor(Color.DKGRAY);
 				Paint paint2 = new Paint();
 				paint2.setColor(Color.GREEN);
-				
+				paint2.setStyle(Style.STROKE);
 				for ( int i = 0; i < 8; i++ ) {
 					for (int j = 0; j < 8; j++) {
-							canvas.drawBitmap(Game.getObject().getStage().getPathBitmap(test[j][i]), i*40, j*40, null);
+							canvas.drawBitmap(Game.getObject().getStage().getPathBitmap(test[j][i]), offestOfMapX + i*blockSize, offestOfMapY + j*blockSize, null);
 					}
 				}
 				
@@ -68,6 +75,7 @@ public class Panel extends SurfaceView implements SurfaceHolder.Callback {
 					layer = Game.getObject().getLayer(i);
 					for (int j = 0; j < layer.size(); j++) {
 						canvas.drawBitmap(layer.get(j).getSprite().getBitmap(), layer.get(j).getX(), layer.get(j).getY(), null);
+						//canvas.drawCircle(layer.get(j).getX() + layer.get(j).getWidth()/2, layer.get(j).getY() + layer.get(j).getHeight()/2, 100, paint2);
 					}
 				}
 				
@@ -118,5 +126,17 @@ public class Panel extends SurfaceView implements SurfaceHolder.Callback {
 	
 	public boolean isReady() {
 		return isReady;
+	}
+	
+	public float getBlockSize() {
+		return blockSize;
+	}
+	
+	public float getOffestOfMapX() {
+		return offestOfMapX;
+	}
+	
+	public float getOffestOfMapY() {
+		return offestOfMapY;
 	}
 }
