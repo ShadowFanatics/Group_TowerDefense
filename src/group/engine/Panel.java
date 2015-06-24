@@ -12,16 +12,21 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.graphics.Rect;
+import android.graphics.RectF;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
 public class Panel extends SurfaceView implements SurfaceHolder.Callback {
 	/* seetings */
-	private float blockSize = 40;//40*40
+	private float blockSizeWidth = 40;
+	private float blockSizeHeight = 40;
 	private float offestOfMapX = 40;
 	private float offestOfMapY = 80;
-	
+	private float screeWidth;
+	private float screenHeight;
+	private float density;
 	/* --------*/
 	private static Panel panel = null;
 	
@@ -30,9 +35,9 @@ public class Panel extends SurfaceView implements SurfaceHolder.Callback {
 	private Thread paintThread;
 	private Resources res;
 	
-	public static Panel getObject(Context context) {
+	public static Panel getObject(Context context, int screeWidth, int screenHeight) {
 		if ( panel == null ) {
-			panel = new Panel(context);
+			panel = new Panel(context, screeWidth, screenHeight);
 		}
 		return panel;
 	}
@@ -45,11 +50,17 @@ public class Panel extends SurfaceView implements SurfaceHolder.Callback {
 		return panel;
 	}
 	
-	public Panel(Context context) {
+	public Panel(Context context, int screeWidth, int screenHeight) {
 		super(context);
+		this.screeWidth = screeWidth;
+		this.screenHeight = screenHeight;
+		Log.e("screeWidth",String.valueOf(screeWidth));
+		Log.e("screenHeight",String.valueOf(screenHeight));
 		res = context.getResources(); 
 		surfaceHolder = this.getHolder();
 		surfaceHolder.addCallback(this);
+		density = res.getDisplayMetrics().density;
+		
 	}
 	private ArrayList<Object> layer = null;
 	public void draw() {
@@ -58,7 +69,12 @@ public class Panel extends SurfaceView implements SurfaceHolder.Callback {
 		try {
 			canvas = surfaceHolder.lockCanvas(null);
 			synchronized (surfaceHolder) {
+				offestOfMapX = (float) (screeWidth * 0.05);
+				offestOfMapY = (float) (screenHeight * 0.018);
+				blockSizeWidth = (float) ( screeWidth * 0.0415 );
+				blockSizeHeight = (float) ( screenHeight * 0.074 );
 				canvas.drawColor(Color.BLUE);
+				canvas.drawBitmap(Game.getObject().getBackground(), new Rect(0, 0, Game.getObject().getBackground().getWidth(), Game.getObject().getBackground().getHeight()), new RectF(0, 0, screeWidth, screenHeight), null);
 				int[][] test = Game.getObject().getStage().getPath();
 				Paint paint = new Paint();
 				paint.setColor(Color.DKGRAY);
@@ -67,7 +83,7 @@ public class Panel extends SurfaceView implements SurfaceHolder.Callback {
 				paint2.setStyle(Style.STROKE);
 				for ( int i = 0; i < 8; i++ ) {
 					for (int j = 0; j < 8; j++) {
-							canvas.drawBitmap(Game.getObject().getStage().getPathBitmap(test[j][i]), offestOfMapX + i*blockSize, offestOfMapY + j*blockSize, null);
+							canvas.drawBitmap(Game.getObject().getStage().getPathBitmap(test[j][i]), new Rect(0, 0, 40*(int)density, 40*(int)density), new RectF(offestOfMapX + i*blockSizeWidth, offestOfMapY + j*blockSizeHeight, offestOfMapX + i*blockSizeWidth + blockSizeWidth, offestOfMapY + j*blockSizeHeight + blockSizeHeight), null);
 					}
 				}
 				
@@ -75,7 +91,7 @@ public class Panel extends SurfaceView implements SurfaceHolder.Callback {
 					layer = Game.getObject().getLayer(i);
 					for (int j = 0; j < layer.size(); j++) {
 						canvas.drawBitmap(layer.get(j).getSprite().getBitmap(), layer.get(j).getX(), layer.get(j).getY(), null);
-						//canvas.drawCircle(layer.get(j).getX() + layer.get(j).getWidth()/2, layer.get(j).getY() + layer.get(j).getHeight()/2, 100, paint2);
+						canvas.drawCircle(layer.get(j).getX() + layer.get(j).getWidth()/2, layer.get(j).getY() + layer.get(j).getHeight()/2, 100, paint2);
 					}
 				}
 				
@@ -128,8 +144,8 @@ public class Panel extends SurfaceView implements SurfaceHolder.Callback {
 		return isReady;
 	}
 	
-	public float getBlockSize() {
-		return blockSize;
+	public float[] getBlockSize() {
+		return new float[]{blockSizeWidth, blockSizeHeight};
 	}
 	
 	public float getOffestOfMapX() {
