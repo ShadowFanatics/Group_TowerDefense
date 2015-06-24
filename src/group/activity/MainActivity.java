@@ -12,8 +12,7 @@ public class MainActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.menuactivity);
-		
+		setContentView(R.layout.menuactivity);	
 	}
 	
 	public void start(View view)//開始遊戲
@@ -24,9 +23,10 @@ public class MainActivity extends Activity {
 	}
 	public void record(View view)//排行榜
 	{
-		Intent intent=new Intent();
-		intent.setClass(MainActivity.this, MainActivity.class);
+		Intent intent = new Intent();
+		intent.setClass(MainActivity.this, RankActivity.class);
 		startActivity(intent);
+		this.finish();
 	}
 	public void quit(View view)//離開遊戲
 	{

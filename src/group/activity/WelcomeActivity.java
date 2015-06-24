@@ -6,7 +6,6 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -71,8 +70,7 @@ public class WelcomeActivity extends Activity{
 				Intent intent = new Intent();
 				intent.setClass(WelcomeActivity.this, MainActivity.class);
 				startActivity(intent);
-				overridePendingTransition(R.anim.activity_open_translate,
-						R.anim.activity_close_scale);
+				overridePendingTransition(R.anim.activity_open_translate, R.anim.activity_close_scale);
 				finish();
 			}
 
