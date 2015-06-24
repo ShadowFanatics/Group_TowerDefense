@@ -19,10 +19,13 @@ public class Stage {
 	private EnemyPath[] enemyPaths;
 	private Enemy[] enemies;
 	private int enemyIdCount = 0;
+	private Bitmap backgroundBitmap;
+	
 	public Stage(int stageID) {
 		switch (stageID) {
 			default:
 				mapData = new Map(0);
+				backgroundBitmap = BitmapFactory.decodeResource(Panel.getObject().getResources(), R.drawable.back);
 				pathBitmap = new Bitmap[pathImage.length];
 				for ( int i = 0; i < pathImage.length; i++ ) {
 					pathBitmap[i] = BitmapFactory.decodeResource(Panel.getObject().getResources(), pathImage[i]);
@@ -64,5 +67,9 @@ public class Stage {
 		}
 		return startPoints[i];
 		
+	}
+	
+	public Bitmap getBackground() {
+		return backgroundBitmap;
 	}
 }

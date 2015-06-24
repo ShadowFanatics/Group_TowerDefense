@@ -1,6 +1,7 @@
 package group.objects;
 
 import android.graphics.Bitmap;
+import android.graphics.Rect;
 import android.util.Log;
 
 public class Object {
@@ -43,5 +44,4 @@ public class Object {
 	public float getHeight() {
 		return height;
 	}
-	
 }

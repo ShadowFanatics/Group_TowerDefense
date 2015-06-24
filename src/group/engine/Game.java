@@ -45,18 +45,18 @@ public class Game {
 	
 	public void createEnemy(int id,int location, int type, int path) {
 		Point createPoint = stage.getStartPoint(location);
-		float blockSize = Panel.getObject().getBlockSize();
+		float[] blockSize = Panel.getObject().getBlockSize();
 		float offestOfMapX = Panel.getObject().getOffestOfMapX();
 		float offestOfMapY = Panel.getObject().getOffestOfMapY();
-		Enemy newEnemy = new Enemy(BitmapFactory.decodeResource(Panel.getObject().getResources(), R.drawable.ic_launcher), offestOfMapX + createPoint.x*blockSize, offestOfMapY + createPoint.y*blockSize, id, type, path);
+		Enemy newEnemy = new Enemy(BitmapFactory.decodeResource(Panel.getObject().getResources(), R.drawable.ic_launcher), offestOfMapX + createPoint.x*blockSize[0], offestOfMapY + createPoint.y*blockSize[1], id, type, path);
 		enemies.add(newEnemy);
 	}
 	
 	public void createTower(int tower_type, int x, int y) {
-		float blockSize = Panel.getObject().getBlockSize();
+		float[] blockSize = Panel.getObject().getBlockSize();
 		float offestOfMapX = Panel.getObject().getOffestOfMapX();
 		float offestOfMapY = Panel.getObject().getOffestOfMapY();
-		Tower newtower = new Tower(BitmapFactory.decodeResource(Panel.getObject().getResources(), R.drawable.ic_launcher), offestOfMapX + x*blockSize, offestOfMapY + y*blockSize, tower_type);
+		Tower newtower = new Tower(BitmapFactory.decodeResource(Panel.getObject().getResources(), R.drawable.ic_launcher), offestOfMapX + x*blockSize[0], offestOfMapY + y*blockSize[1], tower_type);
 		towers.add(newtower);
 	}
 	
@@ -86,8 +86,8 @@ public class Game {
 		for ( int i = 0; i < enemies.size(); i++ ) {
 			movingEnemy = enemies.get(i);
 			Point nextLocation = stage.getEnemyPath(movingEnemy.getWalkPathID()).getNextLocation(movingEnemy.getHadGoPath());
-			float offestX = nextLocation.x * Panel.getObject().getBlockSize() + Panel.getObject().getOffestOfMapX() - movingEnemy.getX();
-			float offestY = nextLocation.y * Panel.getObject().getBlockSize() + Panel.getObject().getOffestOfMapY() - movingEnemy.getY();
+			float offestX = nextLocation.x * Panel.getObject().getBlockSize()[0] + Panel.getObject().getOffestOfMapX() - movingEnemy.getX();
+			float offestY = nextLocation.y * Panel.getObject().getBlockSize()[1] + Panel.getObject().getOffestOfMapY() - movingEnemy.getY();
 			if ( offestX == 0.0 && offestY == 0 ) {
 				if ( movingEnemy.getHadGoPath() < stage.getEnemyPath(movingEnemy.getWalkPathID()).getLength() - 1 ) {
 					movingEnemy.addHadGoPath();
@@ -158,5 +158,9 @@ public class Game {
 			default:
 				return null;
 		}
+	}
+	
+	public Bitmap getBackground() {
+		return stage.getBackground();
 	}
 }
