@@ -6,10 +6,10 @@ public class RankData {
 	public long id = 0;
 	private String name;
 	private String score;
-	private String date;
-	//private String time_string;
-	private Drawable icon1;
-	private Drawable icon2;
+	private String money;
+	private String time;
+	//private Drawable icon1;
+	//private Drawable icon2;
 	
 	public String getName() {
 		return name;
@@ -19,10 +19,13 @@ public class RankData {
 		return score;
 	}
 	
-	public String getDate() {
-		return date;
+	public String getMoney() {
+		return money;
 	}
-	
+	public String getTime() {
+		return time;
+	}
+	/*
 	public Drawable getIcon1(){
 		return icon1;
 	}
@@ -38,11 +41,12 @@ public class RankData {
     public void setIcon2(Drawable icon) {
         this.icon2 = icon;
     }
-	
-	public RankData(long id, String score,String date, String name) {
+	*/
+	public RankData(long id, String score,String time,String money, String name) {
 		this.id = id;
 		this.score = score;
-		this.date = date;
+		this.money = money;
 		this.name = name;
+		this.time = time;
 	}
 }

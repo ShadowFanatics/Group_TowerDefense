@@ -112,21 +112,20 @@ public class RankActivity extends Activity{
 	    private void initData() {
 
 	        mListlist = new ArrayList<RankData>();
-	        
 
-
-			mListlist.add(new RankData(0,"30","2015-05-07 00:30", "硬硬"));
-			mListlist.add(new RankData(1,"25","2015-05-07 01:25","邦弟"));
-			mListlist.add(new RankData(2,"37","2015-05-07 02:37","岳霖"));
-			mListlist.add(new RankData(3,"7","2015-05-07 03:67","熊貓"));
-			mListlist.add(new RankData(4,"11","2015-05-07 04:18","魚蛋"));
+			mListlist.add(new RankData(0,"30","00:30","123", "硬硬"));
+			mListlist.add(new RankData(1,"25","01:25","321","邦弟"));
+			mListlist.add(new RankData(2,"37","02:37","456","岳霖"));
+			mListlist.add(new RankData(3,"7","03:67","654","熊貓"));
+			mListlist.add(new RankData(4,"11","04:18","145","魚蛋"));
+			mListlist.add(new RankData(4,"56","04:34","600","肉餅臉"));
+			
 			readState();
 
 			DisplayMetrics displayMetrics = new DisplayMetrics();
 			getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
 			display_width = displayMetrics.widthPixels;
 			display_height = displayMetrics.heightPixels;
-			//Toast.makeText(Ranking.this, display_width + ":width" + display_height + "height", Toast.LENGTH_LONG).show();;
 		}
 	    
 		private Button.OnClickListener backButtonListener = new Button.OnClickListener()
@@ -144,9 +143,10 @@ public class RankActivity extends Activity{
 			Bundle bundle = getIntent().getExtras();
 			if ( bundle.getBoolean("save")) {
 				String score = bundle.getString("score");
-				String date = bundle.getString("time");
+				String time = bundle.getString("time");
 				String name = bundle.getString("name");
-				RankData newData = new RankData(index,score, date, name);
+				String money = bundle.getString("money");
+				RankData newData = new RankData(index,score, time, money, name);
 				mListlist.add(newData);
 				postDataDAO localData = new postDataDAO(getApplicationContext());
 				localData.insert(newData);
@@ -163,9 +163,10 @@ public class RankActivity extends Activity{
 				Log.e("!!",String.valueOf(i));
 				long id =  messages.get(i).id;
 				String name =  messages.get(i).getName();
-				String date =  messages.get(i).getDate();
+				String time =  messages.get(i).getTime();
 				String score =  messages.get(i).getScore();
-				RankData item = new RankData(id,score, date, name);
+				String money = messages.get(i).getMoney();
+				RankData item = new RankData(id, score, time, money, name);
 				mListlist.add(item);
 			}
 			localData.close();
@@ -177,16 +178,14 @@ public class RankActivity extends Activity{
 			SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 			Date dateValue = simpleDateFormat.parse(rankString, position);
 	    	return dateValue;
-		}*/	
+		}*/
+		
 	    public class MyAdapter extends BaseAdapter {  
 	    	  
-	        //private Context mContext;  
 	        private List<RankData> mList;
 	        private LayoutInflater mInflater;
 	      
-	        public MyAdapter(List<RankData> list) {  
-	            //this.mContext = context;  
-	            //this.mList = list;
+	        public MyAdapter(List<RankData> list) {
 				if (list == null) {
 					list = new ArrayList<RankData>();
 				}
@@ -210,9 +209,9 @@ public class RankActivity extends Activity{
 	            private TextView t1;  
 	            private TextView t2;
 	            private TextView t3;
+	            private TextView t4;
 	            //private ImageView imageview1;
 	            //private ImageView imageview2;
-	            private TextView timerView;
 	        }
 
 			public View getView(int position, View convertView, ViewGroup parent) {
@@ -221,9 +220,11 @@ public class RankActivity extends Activity{
 				if (null == convertView) {
 					mViewHolder = new ViewHolder();
 					convertView = mInflater.inflate(R.layout.record_listview_item, null);
-					mViewHolder.t1 = (TextView) convertView.findViewById(R.id.record_data);
-					mViewHolder.t2 = (TextView) convertView.findViewById(R.id.record_money);
-					mViewHolder.t3 = (TextView) convertView.findViewById(R.id.record_zhidou);
+					mViewHolder.t1 = (TextView) convertView.findViewById(R.id.record_name);
+					mViewHolder.t2 = (TextView) convertView.findViewById(R.id.record_time);
+					mViewHolder.t3 = (TextView) convertView.findViewById(R.id.record_wave);
+					mViewHolder.t4 = (TextView) convertView.findViewById(R.id.record_money);
+					
 					//mViewHolder.status = (ImageView) convertView.findViewById(R.id.record_statu);
 					convertView.setTag(mViewHolder);
 				} else {
@@ -232,9 +233,10 @@ public class RankActivity extends Activity{
 	      
 	            //holder.imageview1.setImageDrawable(mList.get(position).getIcon1());
 	            //holder.imageview2.setImageDrawable(mList.get(position).getIcon2());
-	            mViewHolder.t1.setText(mList.get(position).getDate());  
-	            mViewHolder.t2.setText(mList.get(position).getName());
-	            mViewHolder.t3.setText(mList.get(position).getScore() + "層");
+	            mViewHolder.t1.setText(mList.get(position).getName());
+				mViewHolder.t2.setText(mList.get(position).getTime());
+	            mViewHolder.t3.setText(mList.get(position).getScore() + "wave");
+	            mViewHolder.t4.setText(mList.get(position).getMoney());
 	            
 	            //holder.imageview1.getLayoutParams().height = display_height / 9;
 	            //holder.imageview1.getLayoutParams().width = display_width / 9;
