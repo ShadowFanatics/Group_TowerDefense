@@ -81,16 +81,18 @@ public class Panel extends SurfaceView implements SurfaceHolder.Callback {
 				Paint paint2 = new Paint();
 				paint2.setColor(Color.GREEN);
 				paint2.setStyle(Style.STROKE);
+				Rect block = new Rect(0, 0, Game.getObject().getStage().getPathBitmap(test[0][0]).getWidth(), Game.getObject().getStage().getPathBitmap(test[0][0]).getHeight());
 				for ( int i = 0; i < 8; i++ ) {
 					for (int j = 0; j < 8; j++) {
-							canvas.drawBitmap(Game.getObject().getStage().getPathBitmap(test[j][i]), new Rect(0, 0, 40*(int)density, 40*(int)density), new RectF(offestOfMapX + i*blockSizeWidth, offestOfMapY + j*blockSizeHeight, offestOfMapX + i*blockSizeWidth + blockSizeWidth, offestOfMapY + j*blockSizeHeight + blockSizeHeight), null);
+							canvas.drawBitmap(Game.getObject().getStage().getPathBitmap(test[j][i]), block, new RectF(offestOfMapX + i*blockSizeWidth, offestOfMapY + j*blockSizeHeight, offestOfMapX + i*blockSizeWidth + blockSizeWidth, offestOfMapY + j*blockSizeHeight + blockSizeHeight), null);
 					}
 				}
 				
 				for ( int i = 0; i < 3; i++ ) {
 					layer = Game.getObject().getLayer(i);
 					for (int j = 0; j < layer.size(); j++) {
-						canvas.drawBitmap(layer.get(j).getSprite().getBitmap(), layer.get(j).getX(), layer.get(j).getY(), null);
+						//canvas.drawBitmap(layer.get(j).getSprite().getBitmap(), layer.get(j).getX(), layer.get(j).getY(), null);
+						canvas.drawBitmap(layer.get(j).getSprite().getBitmap(), new Rect(0,0,layer.get(j).getSprite().getBitmap().getWidth() * (int)density, layer.get(j).getSprite().getBitmap().getHeight() * (int)density), new RectF(layer.get(j).getX(),layer.get(j).getY(),layer.get(j).getX() + layer.get(j).getWidth(),layer.get(j).getY() + layer.get(j).getHeight()), null);
 						canvas.drawCircle(layer.get(j).getX() + layer.get(j).getWidth()/2, layer.get(j).getY() + layer.get(j).getHeight()/2, 100, paint2);
 					}
 				}

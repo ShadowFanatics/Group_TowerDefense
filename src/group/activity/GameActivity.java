@@ -20,6 +20,7 @@ public class GameActivity extends Activity implements Runnable{
 	private Thread paintThread;
 	private Game game;
 	private EventHandler eventHandler;
+	private boolean isPause = false;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -41,7 +42,7 @@ public class GameActivity extends Activity implements Runnable{
 	}
 	
 	public void run() {
-		while (true) {
+		while (!isPause) {
 			game.runGame();
 			scene.draw();
 			try {
@@ -52,5 +53,13 @@ public class GameActivity extends Activity implements Runnable{
 			}
 		}
 	}
+	
+	@Override
+	protected void onPause() {
+		super.onPause();
+		isPause = true;
+		finish();
+	}
+
 
 }
