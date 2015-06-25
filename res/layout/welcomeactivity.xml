@@ -10,7 +10,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:background="@drawable/toufa" />
+        android:background="@drawable/team_icon" />
 
     <TextView
         android:id="@+id/text"
@@ -31,7 +31,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="5.0dip"
-        android:text="塔防  For Android v1.0"
+        android:text="太空戰士 欺  For Android v1.0"
         android:textColor="#55ffffff"
         android:textSize="12sp" />
 

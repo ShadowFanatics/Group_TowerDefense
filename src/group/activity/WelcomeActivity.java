@@ -20,7 +20,7 @@ public class WelcomeActivity extends Activity{
 	TextView tv_text;
 	ObjectAnimator fadein;
 	ObjectAnimator mover;
-	private String []str={"體驗最原始守衛", "無限挑戰，爽快闖關"};
+	private String []str={"最狂野的守衛，最奇幻的體驗", "無限挑戰，爽快闖關"};
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

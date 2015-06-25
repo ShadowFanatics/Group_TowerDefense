@@ -24,10 +24,12 @@ public class postDataDAO {
 	public static final String MONEY_COLUMN = "money";
 
 	// 使用上面宣告的變數建立表格的SQL指令
-	public static final String CREATE_TABLE = "CREATE TABLE " + TABLE_NAME
+	public static final String CREATE_TABLE = 
+			"CREATE TABLE " + TABLE_NAME
 			+ " (" + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-			+ NAME_COLUMN + " TEXT NOT NULL, " + TIME_COLUMN
-			+ " TEXT NOT NULL, " + SCORE_COLUMN + " TEXT NOT NULL " 
+			+ NAME_COLUMN + " TEXT NOT NULL, " 
+			+ TIME_COLUMN + " TEXT NOT NULL, " 
+			+ SCORE_COLUMN + " TEXT NOT NULL, " 
 			+ MONEY_COLUMN + " TEXT NOT NULL )";
 
 	// 資料庫物件

@@ -8,12 +8,14 @@ public class Tower extends Object {
 	private float radius;
 	private int attackInterval;
 	private int timeCount = 0;
+	private int type;	//TODO
 	public Tower(Bitmap bitmap, float x, float y, int type) {
 		super(bitmap, x, y);
 		this.attack = TowerTypeList.attack[type];
 		this.bulletSpeed = TowerTypeList.bulletSpeed[type];
 		this.radius = TowerTypeList.radius[type];
 		this.attackInterval = TowerTypeList.attackInterval[type];
+		this.type = type;//TODO
 	}
 	
 	public boolean detect(Enemy enemy) {
@@ -47,5 +49,11 @@ public class Tower extends Object {
 	
 	public float getRadius() {
 		return radius;
+	}
+	
+	//TODO
+	public int getType()
+	{
+		return type;
 	}
 }

@@ -1,13 +1,8 @@
 package group.activity;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 
 import sqlite.RankData;
@@ -52,7 +47,7 @@ public class RankActivity extends Activity{
 	        button.setOnClickListener(backButtonListener);
 	        
 	        initData();
-	        //addData();
+	        addData();
 	        //list sort
 	        Collections.sort(mListlist,new Comparator<RankData>() {
 	        	
@@ -113,12 +108,12 @@ public class RankActivity extends Activity{
 
 	        mListlist = new ArrayList<RankData>();
 
-			mListlist.add(new RankData(0,"30","00:30","123", "硬硬"));
-			mListlist.add(new RankData(1,"25","01:25","321","邦弟"));
-			mListlist.add(new RankData(2,"37","02:37","456","岳霖"));
-			mListlist.add(new RankData(3,"7","03:67","654","熊貓"));
-			mListlist.add(new RankData(4,"11","04:18","145","魚蛋"));
-			mListlist.add(new RankData(4,"56","04:34","600","肉餅臉"));
+			//mListlist.add(new RankData(1,"30","00:30","123", "硬硬"));
+			//mListlist.add(new RankData(2,"25","01:25","321","邦弟"));
+			//mListlist.add(new RankData(3,"37","02:37","456","岳霖"));
+			//mListlist.add(new RankData(4,"7","03:67","654","熊貓"));
+			//mListlist.add(new RankData(5,"11","04:18","145","魚蛋"));
+			//mListlist.add(new RankData(6,"56","04:34","600","肉餅臉"));
 			
 			readState();
 
