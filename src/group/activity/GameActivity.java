@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.EditText;
+import audio.AudioManager;
 import group.engine.EventHandler;
 import group.engine.Game;
 import group.engine.Panel;
@@ -42,8 +43,20 @@ public class GameActivity extends Activity implements Runnable{
 		setContentView(scene);
 		eventHandler = EventHandler.getObject();
 		game = Game.getObject();
+		
+		//TODO
+		AudioManager.setContext(GameActivity.this);
+		AudioManager.playBGM_battle();
+		
 		paintThread = new Thread(this);
 		paintThread.start();
+	}
+	
+	@Override
+	protected void onStop()	//TODO
+	{
+		super.onStop();
+		AudioManager.releasePlayer_SE();
 	}
 	
 	public void run() {
