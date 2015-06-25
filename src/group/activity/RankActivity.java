@@ -34,6 +34,7 @@ public class RankActivity extends Activity{
 	    private Button button;
 		private int display_width, display_height;
 		private long index = 0;
+		private boolean save;	//TODO
 		private static final String TAG = "Rank_activity";
 	    /** Called when the activity is first created. */  
 	    @Override  
@@ -126,17 +127,22 @@ public class RankActivity extends Activity{
 		private Button.OnClickListener backButtonListener = new Button.OnClickListener()
 		{		
 			public void onClick(View v)
-			{			
-				Intent intent = new Intent();
-				intent.setClass(RankActivity.this, MainActivity.class);
-				startActivity(intent);
+			{
+				//TODO
+				if(!save)
+				{
+					Intent intent = new Intent();
+					intent.setClass(RankActivity.this, MainActivity.class);
+					startActivity(intent);
+				}
 				RankActivity.this.finish();
 			}
 		};
 	    
 	    private void addData() {
 			Bundle bundle = getIntent().getExtras();
-			if ( bundle.getBoolean("save")) {
+			save = bundle.getBoolean("save");	//TODO
+			if (save) {
 				String score = bundle.getString("score");
 				String time = bundle.getString("time");
 				String name = bundle.getString("name");

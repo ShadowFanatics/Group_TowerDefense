@@ -52,13 +52,6 @@ public class GameActivity extends Activity implements Runnable{
 		paintThread.start();
 	}
 	
-	@Override
-	protected void onStop()	//TODO
-	{
-		super.onStop();
-		AudioManager.releasePlayer_SE();
-	}
-	
 	public void run() {
 		while (!isPause) {
 			if ( game.runGame() ) {
@@ -114,6 +107,7 @@ public class GameActivity extends Activity implements Runnable{
 		super.onPause();
 		isPause = true;
 		
+		AudioManager.releaseAll();
 		finish();
 	}
 

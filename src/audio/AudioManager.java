@@ -117,6 +117,7 @@ public class AudioManager
 	{
 		releasePlayer_bgm();
 		releasePlayer_SE();
+		currentContext = null;
 	}
 	
 	public static void playBGM_title()
