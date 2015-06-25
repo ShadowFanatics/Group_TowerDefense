@@ -44,4 +44,8 @@ public class Object {
 	public float getHeight() {
 		return height;
 	}
+	
+	public Object clone() {
+		return new Object(sprite.getBitmap(), x, y);
+	}
 }
