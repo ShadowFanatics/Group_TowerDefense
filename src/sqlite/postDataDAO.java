@@ -29,7 +29,7 @@ public class postDataDAO {
 			+ " (" + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
 			+ NAME_COLUMN + " TEXT NOT NULL, " 
 			+ TIME_COLUMN + " TEXT NOT NULL, " 
-			+ SCORE_COLUMN + " TEXT NOT NULL " 
+			+ SCORE_COLUMN + " TEXT NOT NULL, " 
 			+ MONEY_COLUMN + " TEXT NOT NULL )";
 
 	// 資料庫物件

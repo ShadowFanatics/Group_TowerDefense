@@ -113,12 +113,12 @@ public class RankActivity extends Activity{
 
 	        mListlist = new ArrayList<RankData>();
 
-			mListlist.add(new RankData(0,"30","00:30","123", "硬硬"));
-			mListlist.add(new RankData(1,"25","01:25","321","邦弟"));
-			mListlist.add(new RankData(2,"37","02:37","456","岳霖"));
-			mListlist.add(new RankData(3,"7","03:67","654","熊貓"));
-			mListlist.add(new RankData(4,"11","04:18","145","魚蛋"));
-			mListlist.add(new RankData(4,"56","04:34","600","肉餅臉"));
+			mListlist.add(new RankData(1,"30","00:30","123", "硬硬"));
+			mListlist.add(new RankData(2,"25","01:25","321","邦弟"));
+			mListlist.add(new RankData(3,"37","02:37","456","岳霖"));
+			mListlist.add(new RankData(4,"7","03:67","654","熊貓"));
+			mListlist.add(new RankData(5,"11","04:18","145","魚蛋"));
+			mListlist.add(new RankData(6,"56","04:34","600","肉餅臉"));
 			
 			readState();
 
