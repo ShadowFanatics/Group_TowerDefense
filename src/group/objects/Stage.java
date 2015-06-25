@@ -38,8 +38,8 @@ public class Stage {
 				break;
 		}
 	}
-	private int wave = 0;
-	private int currentWave = 0;
+	private int wave = -1;
+	private int currentWave = -1;
 	private int enemyCount = 0;
 	public void runStage(int time) {
 		if ( time % 13 == 3 ) {

@@ -82,7 +82,7 @@ public class Game {
 				if ( enemies.get(i).giveDemage(demage) ) {
 					/* enemy die */
 					score += 10;
-					money += 100;
+					money += 30;
 					enemies.remove(i);
 				}
 			}
