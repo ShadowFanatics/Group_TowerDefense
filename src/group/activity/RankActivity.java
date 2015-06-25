@@ -52,7 +52,7 @@ public class RankActivity extends Activity{
 	        button.setOnClickListener(backButtonListener);
 	        
 	        initData();
-	        //addData();
+	        addData();
 	        //list sort
 	        Collections.sort(mListlist,new Comparator<RankData>() {
 	        	

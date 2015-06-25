@@ -22,7 +22,12 @@ public class MainActivity extends Activity {
 
 	public void record(View view)//排行榜
 	{
+		Bundle bundle = new Bundle();
+		bundle.putBoolean("save", false);
+		
 		Intent intent = new Intent();
+		intent.putExtras(bundle);
+
 		intent.setClass(MainActivity.this, RankActivity.class);
 		startActivity(intent);
 		this.finish();
