@@ -4,7 +4,8 @@
     android:layout_height="match_parent"
     android:background="@drawable/menu_bg"
     android:orientation="horizontal" >
-
+	
+    <!--
     <TextView
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
@@ -15,12 +16,13 @@
         android:text="塔防  For Android v1.0"
         android:textColor="#55ffffff"
         android:textSize="12sp" />
-
+	-->
     <LinearLayout
-        android:layout_width="200.0dip"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:orientation="vertical" >
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal" >
 
         <TextView
             android:layout_width="fill_parent"
@@ -34,7 +36,8 @@
             android:text="開始遊戲"
             android:textColor="#633833"
             android:textSize="20.0sp"
-            android:textStyle="bold|italic" />
+            android:textStyle="bold|italic" 
+            android:layout_weight="1"/>
 
         <TextView
             android:layout_width="fill_parent"
@@ -48,7 +51,8 @@
             android:text="排行榜"
             android:textColor="#633833"
             android:textSize="20.0sp"
-            android:textStyle="bold|italic" />
+            android:textStyle="bold|italic"
+            android:layout_weight="1" />
 
         <TextView
             android:layout_width="fill_parent"
@@ -62,7 +66,8 @@
             android:text="離開遊戲"
             android:textColor="#633833"
             android:textSize="20.0sp"
-            android:textStyle="bold|italic" />
+            android:textStyle="bold|italic" 
+            android:layout_weight="1"/>
     </LinearLayout>
 
 </RelativeLayout>
