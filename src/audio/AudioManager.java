@@ -100,10 +100,10 @@ public class AudioManager
 		sePlayer.start();
 	}
 	
-	public static void playSE_shoot_stone()
+	public static void playSE_shoot_electricity()
 	{
 		releasePlayer_SE();
-		sePlayer = MediaPlayer.create(currentContext, R.raw.shoot_stone);
+		sePlayer = MediaPlayer.create(currentContext, R.raw.shoot_electricity);
 		sePlayer.setLooping(false);
 		sePlayer.start();
 	}
