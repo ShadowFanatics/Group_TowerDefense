@@ -9,6 +9,7 @@ public class Tower extends Object {
 	private int attackInterval;
 	private int timeCount = 0;
 	private int type;	//TODO
+	private int level;
 	public Tower(Bitmap bitmap, float x, float y, int type) {
 		super(bitmap, x, y);
 		this.attack = TowerTypeList.attack[type];
@@ -16,6 +17,7 @@ public class Tower extends Object {
 		this.radius = TowerTypeList.radius[type];
 		this.attackInterval = TowerTypeList.attackInterval[type];
 		this.type = type;//TODO
+		level = 1;
 	}
 	
 	public boolean detect(Enemy enemy) {
@@ -40,7 +42,7 @@ public class Tower extends Object {
 	}
 	
 	public int getAttack() {
-		return attack;
+		return attack*level;
 	}
 	
 	public float getBulletSpeed() {
@@ -55,5 +57,15 @@ public class Tower extends Object {
 	public int getType()
 	{
 		return type;
+	}
+	
+	public int getLevel()
+	{
+		return level;
+	}
+	
+	public void levelUP()
+	{
+		level++;
 	}
 }

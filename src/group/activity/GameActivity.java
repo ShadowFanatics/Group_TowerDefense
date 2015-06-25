@@ -61,7 +61,12 @@ public class GameActivity extends Activity implements Runnable{
 	
 	public void run() {
 		while (!isPause) {
-			game.runGame();
+			if ( game.runGame() ) {
+				/*end game*/
+				isPause = true;
+				mHandler.sendEmptyMessage(1);
+				break;
+			}
 			scene.draw();
 			try {
 				Thread.sleep(20);
@@ -91,9 +96,9 @@ public class GameActivity extends Activity implements Runnable{
 	    				Bundle bundle = new Bundle();
 	    				bundle.putBoolean("save", true);
 	    				bundle.putString("name", player_name);
-	    				//bundle.putString("score", score);
-	    				//bundle.putString("time", time);
-	    				//bundle.putString("money", money);
+	    				bundle.putString("score", String.valueOf(Game.getObject().getScore()));
+	    				bundle.putString("time", String.valueOf(Game.getObject().getTime()));
+	    				bundle.putString("money", String.valueOf(Game.getObject().getMoney()));
 	    				intent.putExtras(bundle);
 	    				startActivity(intent);
 	    				finish();
@@ -108,6 +113,7 @@ public class GameActivity extends Activity implements Runnable{
 	protected void onPause() {
 		super.onPause();
 		isPause = true;
+		
 		finish();
 	}
 

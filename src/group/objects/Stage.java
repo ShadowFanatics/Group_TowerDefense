@@ -38,11 +38,27 @@ public class Stage {
 				break;
 		}
 	}
-	
+	private int wave = 0;
+	private int currentWave = 0;
+	private int enemyCount = 0;
 	public void runStage(int time) {
-		if ( time >= 3 ) {
-			EventHandler.sendEvent(new Event(Event.ENEMY_CREAT, enemyIdCount++, 0, 0, 0));
-			EventHandler.sendEvent(new Event(Event.ENEMY_CREAT, enemyIdCount++, 0, 1, 1));
+		if ( time % 13 == 3 ) {
+			wave++;
+			enemyCount = 0;
+		}
+		if ( wave != currentWave ) {
+			enemyCount++;
+			EventHandler.sendEvent(new Event(Event.ENEMY_CREAT, enemyIdCount++, (wave % EnemyTypeList.types), 0, 0));
+			EventHandler.sendEvent(new Event(Event.ENEMY_CREAT, enemyIdCount++, (wave % EnemyTypeList.types), 1, 1));
+			if ( enemyCount >= 5 ) {
+				currentWave++;
+			}
+		}
+		
+		if ( time % 91 == 3 ) {
+			for ( int i = 0; i < EnemyTypeList.types; i++ ) {
+				EnemyTypeList.HP[i] *= 1.5;
+			}
 		}
 	}
 	

@@ -4,6 +4,7 @@ import group.activity.R;
 import group.objects.Bullet;
 import group.objects.Object;
 import group.objects.Tower;
+import group.objects.TowerTypeList;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -103,7 +104,7 @@ public class Panel extends SurfaceView implements SurfaceHolder.Callback {
 				canvas.drawBitmap(Game.getObject().getBackground(), new Rect(0, 0, Game.getObject().getBackground().getWidth(), Game.getObject().getBackground().getHeight()), new RectF(0, 0, screeWidth, screenHeight), null);
 				int[][] test = Game.getObject().getStage().getPath();
 				Paint paint = new Paint();
-				paint.setColor(Color.DKGRAY);
+				paint.setColor(Color.WHITE);
 				Paint paint2 = new Paint();
 				paint2.setColor(Color.GREEN);
 				paint2.setStyle(Style.STROKE);
@@ -113,7 +114,9 @@ public class Panel extends SurfaceView implements SurfaceHolder.Callback {
 							canvas.drawBitmap(Game.getObject().getStage().getPathBitmap(test[j][i]), block, new RectF(offestOfMapX + i*blockSizeWidth, offestOfMapY + j*blockSizeHeight, offestOfMapX + i*blockSizeWidth + blockSizeWidth, offestOfMapY + j*blockSizeHeight + blockSizeHeight), null);
 					}
 				}
-				
+				Paint paint4 = new Paint();
+				paint4.setColor(Color.WHITE);
+				paint4.setTextSize(screenHeight*(float)0.02);
 				for ( int i = 0; i < 3; i++ ) {
 					layer = Game.getObject().getLayer(i);
 					for (int j = 0; j < layer.size(); j++) {
@@ -126,15 +129,33 @@ public class Panel extends SurfaceView implements SurfaceHolder.Callback {
 						if ( i == 1 ) {
 							Tower tower = (Tower)layer.get(j);
 							canvas.drawCircle(tower.getX() + blockSizeWidth/2, tower.getY() + blockSizeHeight/2, tower.getRadius(), paint2);
+							canvas.drawText("Level: " + String.valueOf(tower.getLevel()), tower.getX() + 1, tower.getY() + blockSizeHeight* (float)0.9, paint4);
 						}
 					}
 				}
-				
+				Paint paintMask = new Paint();
+				paintMask.setColor(Color.BLACK);
+				paintMask.setAlpha(200);
+				Paint paint3 = new Paint();
+				paint3.setColor(Color.BLACK);
+				paint3.setTextSize(screenHeight*(float)0.02);
 				for (int i = 0; i < UITower.size(); i++) {
-					canvas.drawBitmap(UITower.get(i).getSprite().getBitmap(), UITower.get(i).getX(), UITower.get(i).getY(), null);
+					canvas.drawRect(UITower.get(i).getX(), UITower.get(i).getY(), UITower.get(i).getX() + blockSizeWidth, UITower.get(i).getY() + blockSizeHeight, paint);
+					canvas.drawBitmap(UITower.get(i).getSprite().getBitmap(), new Rect( 0, 0, UITower.get(i).getSprite().getBitmap().getWidth(), UITower.get(i).getSprite().getBitmap().getHeight()), new RectF( UITower.get(i).getX(), UITower.get(i).getY(), UITower.get(i).getX() + blockSizeWidth, UITower.get(i).getY() + blockSizeHeight), null);
+					canvas.drawText(String.valueOf(TowerTypeList.moneyCost[i]), UITower.get(i).getX(), UITower.get(i).getY() + blockSizeHeight*(float)1.2, paint3);
+					if ( Game.getObject().getMoney() < TowerTypeList.moneyCost[i] ) {
+						canvas.drawRect(UITower.get(i).getX(), UITower.get(i).getY(), UITower.get(i).getX() + blockSizeWidth, UITower.get(i).getY() + blockSizeHeight, paintMask);
+					}
 				}
+				paint3.setColor(Color.BLACK);
+				paint3.setTextSize(screenHeight*(float)0.05);
+				canvas.drawText("Score: " + String.valueOf(Game.getObject().getScore()), screeWidth * (float)0.73, screenHeight * (float)0.75, paint3);
+				canvas.drawText("Time: " + String.valueOf(Game.getObject().getScore()), screeWidth * (float)0.73, screenHeight * (float)0.8, paint3);
+				canvas.drawText("Money: " + String.valueOf(Game.getObject().getMoney()), screeWidth * (float)0.73, screenHeight * (float)0.85, paint3);
+				canvas.drawText("Life: " + String.valueOf(Game.getObject().getLife()), screeWidth * (float)0.73, screenHeight * (float)0.9, paint3);
+				
 				if ( canDrag ) {
-					canvas.drawBitmap(movingObject.getSprite().getBitmap(), movingObject.getX(), movingObject.getY(), null);
+					canvas.drawBitmap(movingObject.getSprite().getBitmap(), new Rect( 0, 0, movingObject.getSprite().getBitmap().getWidth(), movingObject.getSprite().getBitmap().getHeight()),  new RectF( movingObject.getX(), movingObject.getY(),movingObject.getX() + blockSizeWidth, movingObject.getY() + blockSizeHeight), null);
 				}
 				
 			}
@@ -189,8 +210,8 @@ public class Panel extends SurfaceView implements SurfaceHolder.Callback {
 				point.y = (int) event.getY();
 				for (int i = 0; i < UITower.size(); i++) {
 					Object t = UITower.get(i);
-					RectF temp = new RectF(t.getX(), t.getY(), t.getX() + t.getWidth(), t.getY() + t.getHeight());
-					if (temp.contains(point.x, point.y)){
+					RectF temp = new RectF(t.getX(), t.getY(), t.getX() + blockSizeWidth, t.getY() + blockSizeHeight);
+					if (temp.contains(point.x, point.y) && Game.getObject().getMoney() >= TowerTypeList.moneyCost[i]){
 						movingObject = t.clone();
 						tower_type = i;
 						//Log.e("touch","touch");
@@ -205,7 +226,7 @@ public class Panel extends SurfaceView implements SurfaceHolder.Callback {
 				point.x = (int) event.getX();
 				point.y = (int) event.getY();
 				if (canDrag) {
-					movingObject.setLocation(point.x - movingObject.getWidth() / 2, point.y - movingObject.getHeight() / 2);
+					movingObject.setLocation(point.x - blockSizeWidth / 2, point.y - blockSizeHeight / 2);
 				}
 				break;
 			case MotionEvent.ACTION_UP:

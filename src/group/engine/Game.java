@@ -24,6 +24,9 @@ public class Game {
 	private ArrayList<Tower> towers = new ArrayList<Tower>();
 	private ArrayList<Bullet> bullets = new ArrayList<Bullet>();
 	private int life = 50;
+	private int score = 0;
+	private int money = 0;
+	private Tower[][] buildedTower = new Tower[15][13];
 	
 	public static Game getObject() {
 		if ( game == null ) {
@@ -39,11 +42,13 @@ public class Game {
 		
 	}
 	
-	public void runGame() {
+	public boolean runGame() {
 		enemyMove();
 		towerDetect();
 		bulletFly();
+		money++;
 		//Log.e("!!!", "!!!");
+		return (life == 0);
 	}
 	
 	public void createEnemy(int id,int location, int type, int path) {
@@ -56,17 +61,28 @@ public class Game {
 	}
 	
 	public void createTower(int tower_type, int x, int y) {
-		float[] blockSize = Panel.getObject().getBlockSize();
-		float offestOfMapX = Panel.getObject().getOffestOfMapX();
-		float offestOfMapY = Panel.getObject().getOffestOfMapY();
-		Tower newtower = new Tower(BitmapFactory.decodeResource(Panel.getObject().getResources(), TowerTypeList.images[tower_type]), offestOfMapX + x*blockSize[0], offestOfMapY + y*blockSize[1], tower_type);
-		towers.add(newtower);
+		if ( buildedTower[x][y] == null ) {
+			float[] blockSize = Panel.getObject().getBlockSize();
+			float offestOfMapX = Panel.getObject().getOffestOfMapX();
+			float offestOfMapY = Panel.getObject().getOffestOfMapY();
+			Tower newtower = new Tower(BitmapFactory.decodeResource(Panel.getObject().getResources(), TowerTypeList.images[tower_type]), offestOfMapX + x*blockSize[0], offestOfMapY + y*blockSize[1], tower_type);
+			towers.add(newtower);
+			buildedTower[x][y] = newtower;
+			money -= TowerTypeList.moneyCost[tower_type];
+		}
+		else if ( buildedTower[x][y].getType() == tower_type ) {
+			buildedTower[x][y].levelUP();
+			money -= TowerTypeList.moneyCost[tower_type];
+		}
 	}
 	
 	public void demageEnemy(int enemyID, int demage) {
 		for ( int i = 0; i < enemies.size(); i++ ) {
 			if ( enemies.get(i).getID() == enemyID ) {
 				if ( enemies.get(i).giveDemage(demage) ) {
+					/* enemy die */
+					score += 10;
+					money += 100;
 					enemies.remove(i);
 				}
 			}
@@ -192,4 +208,21 @@ public class Game {
 	public Bitmap getBackground() {
 		return stage.getBackground();
 	}
+	
+	public int getScore() {
+		return score;
+	}
+	
+	public int getMoney() {
+		return money;
+	}
+	
+	public int getTime() {
+		return gameTime;
+	}
+	
+	public int getLife() {
+		return life;
+	}
+	
 }
