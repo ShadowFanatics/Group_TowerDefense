@@ -217,7 +217,9 @@ public class Panel extends SurfaceView implements SurfaceHolder.Callback {
 						for (int j = 0; j < 13; j++) {
 							check = new RectF(offestOfMapX + i*blockSizeWidth, offestOfMapY + j*blockSizeHeight, offestOfMapX + i*blockSizeWidth + blockSizeWidth, offestOfMapY + j*blockSizeHeight + blockSizeHeight);
 							if ( check.contains(point.x, point.y)) {
-								EventHandler.sendEvent(new Event(Event.BUILD_TOWER, tower_type, i, j));
+								if( Game.getObject().getStage().getPath()[j][i] == 0 ) {
+									EventHandler.sendEvent(new Event(Event.BUILD_TOWER, tower_type, i, j));
+								}
 							}
 						}
 					}

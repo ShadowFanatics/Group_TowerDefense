@@ -22,6 +22,7 @@ public class Game {
 	private ArrayList<Enemy> enemies = new ArrayList<Enemy>();
 	private ArrayList<Tower> towers = new ArrayList<Tower>();
 	private ArrayList<Bullet> bullets = new ArrayList<Bullet>();
+	private int life = 50;
 	
 	public static Game getObject() {
 		if ( game == null ) {
@@ -49,7 +50,7 @@ public class Game {
 		float[] blockSize = Panel.getObject().getBlockSize();
 		float offestOfMapX = Panel.getObject().getOffestOfMapX();
 		float offestOfMapY = Panel.getObject().getOffestOfMapY();
-		Enemy newEnemy = new Enemy(BitmapFactory.decodeResource(Panel.getObject().getResources(), R.drawable.ic_launcher), offestOfMapX + createPoint.x*blockSize[0], offestOfMapY + createPoint.y*blockSize[1], id, type, path);
+		Enemy newEnemy = new Enemy(BitmapFactory.decodeResource(Panel.getObject().getResources(), EnemyTypeList.images[type]), offestOfMapX + createPoint.x*blockSize[0], offestOfMapY + createPoint.y*blockSize[1], id, type, path);
 		enemies.add(newEnemy);
 	}
 	
@@ -95,6 +96,8 @@ public class Game {
 				}
 				else {
 					/* arrive end point*/
+					life--;
+					enemies.remove(movingEnemy);
 				}
 			}
 			else {
