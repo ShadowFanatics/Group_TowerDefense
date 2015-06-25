@@ -48,7 +48,7 @@ public class Game {
 		float[] blockSize = Panel.getObject().getBlockSize();
 		float offestOfMapX = Panel.getObject().getOffestOfMapX();
 		float offestOfMapY = Panel.getObject().getOffestOfMapY();
-		Enemy newEnemy = new Enemy(BitmapFactory.decodeResource(Panel.getObject().getResources(), R.drawable.ic_launcher), offestOfMapX + createPoint.x*blockSize[0], offestOfMapY + createPoint.y*blockSize[1], id, type, path);
+		Enemy newEnemy = new Enemy(BitmapFactory.decodeResource(Panel.getObject().getResources(), R.drawable.ic_launcch), offestOfMapX + createPoint.x*blockSize[0], offestOfMapY + createPoint.y*blockSize[1], id, type, path);
 		enemies.add(newEnemy);
 	}
 	
@@ -56,7 +56,7 @@ public class Game {
 		float[] blockSize = Panel.getObject().getBlockSize();
 		float offestOfMapX = Panel.getObject().getOffestOfMapX();
 		float offestOfMapY = Panel.getObject().getOffestOfMapY();
-		Tower newtower = new Tower(BitmapFactory.decodeResource(Panel.getObject().getResources(), R.drawable.ic_launcher), offestOfMapX + x*blockSize[0], offestOfMapY + y*blockSize[1], tower_type);
+		Tower newtower = new Tower(BitmapFactory.decodeResource(Panel.getObject().getResources(), R.drawable.ic_launcch), offestOfMapX + x*blockSize[0], offestOfMapY + y*blockSize[1], tower_type);
 		towers.add(newtower);
 	}
 	

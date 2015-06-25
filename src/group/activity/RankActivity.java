@@ -15,6 +15,12 @@ import sqlite.postDataDAO;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Matrix;
+import android.graphics.PixelFormat;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -39,6 +45,9 @@ public class RankActivity extends Activity{
 	    private Button button;
 		private int display_width, display_height;
 		private long index = 0;
+		//private int lv_bg = R.drawable.pre_recharge_record_item_bg;
+		//private Drawable drawable = getResources().getDrawable(lv_bg);
+		//private Bitmap bitmap;
 		private static final String TAG = "Rank_activity";
 	    /** Called when the activity is first created. */  
 	    @Override  
@@ -50,6 +59,7 @@ public class RankActivity extends Activity{
 	        button = (Button)findViewById(R.id.mm_back);
 	        view.removeView((View)button);
 	        button.setOnClickListener(backButtonListener);
+	        
 	        
 	        initData();
 	        //addData();
@@ -95,7 +105,6 @@ public class RankActivity extends Activity{
 	        MyAdapter myAdapter = new MyAdapter(mListlist);
 	        lv.setAdapter(myAdapter);        
 	        //lv.setOnItemClickListener(onItemClickListener);
-	        
 	        //this.setContentView(lv);
 	          
 	    }
@@ -238,6 +247,7 @@ public class RankActivity extends Activity{
 	            mViewHolder.t3.setText(mList.get(position).getScore() + "wave");
 	            mViewHolder.t4.setText(mList.get(position).getMoney());
 	            
+	            
 	            //holder.imageview1.getLayoutParams().height = display_height / 9;
 	            //holder.imageview1.getLayoutParams().width = display_width / 9;
 	            //holder.imageview2.getLayoutParams().height = display_height / 9;
@@ -253,38 +263,41 @@ public class RankActivity extends Activity{
 					}
 				});*/
 	            
+	            
+	            
 				convertView.findViewById(R.id.reocord_item).setPadding(10, 0, 10, 0);
+				
 	            return convertView;  
 			}
 			
-			
-		    /*private Bitmap scaleBitmap(Bitmap bitmap){
-		    		
-		    	int width = bitmap.getWidth();
-		    	int height = bitmap.getHeight();
-		    	int new_width = display_width / 4 - 30;
-		    	int new_height = display_height / 5;
-		    	float scaleWidth = ((float) new_width ) / width;
-		    	float scaleHeight = ((float) new_height ) / height;
-		    	Matrix matrix = new Matrix();
-		    	matrix.postScale(scaleWidth, scaleHeight);
-		    	Bitmap newbmp = Bitmap.createBitmap(bitmap, 0, 0, width, height, matrix, true);
-		    	return newbmp;
-		    };
-		    
-		    private Bitmap drawableToBitmap(Drawable drawable) {   
-		        int w = drawable.getIntrinsicWidth();  
-		        int h = drawable.getIntrinsicHeight();  
-		   
-		        Bitmap.Config config = drawable.getOpacity() != PixelFormat.OPAQUE ? Bitmap.Config.ARGB_8888  
-		                : Bitmap.Config.RGB_565;  
-		        Bitmap bitmap = Bitmap.createBitmap(w, h, config);  
-		        Canvas canvas = new Canvas(bitmap);  
-		        drawable.setBounds(0, 0, w, h);   
-		        drawable.draw(canvas);
-		        
-		        return bitmap;  
-		    */
+	    }
+	    
+	    private Bitmap scaleBitmap(Bitmap bitmap){
+    		
+	    	int width = bitmap.getWidth();
+	    	int height = bitmap.getHeight();
+	    	int new_width = display_width;
+	    	int new_height = display_height / 7;
+	    	float scaleWidth = ((float) new_width ) / width;
+	    	float scaleHeight = ((float) new_height ) / height;
+	    	Matrix matrix = new Matrix();
+	    	matrix.postScale(scaleWidth, scaleHeight);
+	    	Bitmap newbmp = Bitmap.createBitmap(bitmap, 0, 0, width, height, matrix, true);
+	    	return newbmp;
+	    };
+	    
+	    private Bitmap drawableToBitmap(Drawable drawable) {   
+	        int w = drawable.getIntrinsicWidth();  
+	        int h = drawable.getIntrinsicHeight();  
+	   
+	        Bitmap.Config config = drawable.getOpacity() != PixelFormat.OPAQUE ? Bitmap.Config.ARGB_8888  
+	                : Bitmap.Config.RGB_565;  
+	        Bitmap bitmap = Bitmap.createBitmap(w, h, config);  
+	        Canvas canvas = new Canvas(bitmap);  
+	        drawable.setBounds(0, 0, w, h);   
+	        drawable.draw(canvas);
+	        
+	        return bitmap;  
 	    }
 
 		@Override

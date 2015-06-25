@@ -9,6 +9,7 @@ import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
@@ -20,7 +21,7 @@ public class WelcomeActivity extends Activity{
 	TextView tv_text;
 	ObjectAnimator fadein;
 	ObjectAnimator mover;
-	private String []str={"體驗最原始守衛", "無限挑戰，爽快闖關"};
+	private String []str={"體驗最奇幻守衛", "無限挑戰，爽快闖關"};
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -28,6 +29,9 @@ public class WelcomeActivity extends Activity{
 		setContentView(R.layout.welcomeactivity);
 		myView = (ImageView) findViewById(R.id.welcomeimage);
 		tv_text = (TextView) findViewById(R.id.text);
+		setViewerDensity();
+		
+		
 		ObjectAnimator fadeOut = ObjectAnimator.ofFloat(myView, "alpha", .2f,1f);
 		int index=(new Random()).nextInt(str.length);
 		tv_text.setText(str[index]);
@@ -79,7 +83,12 @@ public class WelcomeActivity extends Activity{
 	}
 
 
-
+	private void setViewerDensity(){	
+		DisplayMetrics metrics = new DisplayMetrics();
+		getWindowManager().getDefaultDisplay().getMetrics(metrics);	
+		//tv_text.setWidth((int)(myView.getWidth() * metrics.density));
+		//tv_text.setHeight((int)(myView.getHeight() * metrics.density));
+	}
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		if (keyCode == KeyEvent.KEYCODE_BACK) {

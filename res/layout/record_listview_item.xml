@@ -2,11 +2,11 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/record_listview_item"
     android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="50dp"
     android:layout_marginLeft="5dp"
     android:layout_marginRight="5dp"
     android:gravity="center"
-    android:background="@drawable/pre_recharge_record_item_bg"
+    android:background="@drawable/pre"
      >
 
     <LinearLayout
@@ -28,6 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="4"
             android:text="PlayerName"
+            android:gravity="center"
             android:textColor="#7b0202"
             android:paddingLeft="4dp"
             android:textSize="@dimen/text_size18" />
