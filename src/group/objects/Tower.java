@@ -44,4 +44,8 @@ public class Tower extends Object {
 	public float getBulletSpeed() {
 		return bulletSpeed;
 	}
+	
+	public float getRadius() {
+		return radius;
+	}
 }

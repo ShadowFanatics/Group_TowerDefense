@@ -34,6 +34,7 @@ public class Game {
 		stage = new Stage(0);
 		timer = new Timer();
 		timer.schedule(task, 0,1000);
+		
 	}
 	
 	public void runGame() {
@@ -56,7 +57,7 @@ public class Game {
 		float[] blockSize = Panel.getObject().getBlockSize();
 		float offestOfMapX = Panel.getObject().getOffestOfMapX();
 		float offestOfMapY = Panel.getObject().getOffestOfMapY();
-		Tower newtower = new Tower(BitmapFactory.decodeResource(Panel.getObject().getResources(), R.drawable.ic_launcher), offestOfMapX + x*blockSize[0], offestOfMapY + y*blockSize[1], tower_type);
+		Tower newtower = new Tower(BitmapFactory.decodeResource(Panel.getObject().getResources(), TowerTypeList.images[tower_type]), offestOfMapX + x*blockSize[0], offestOfMapY + y*blockSize[1], tower_type);
 		towers.add(newtower);
 	}
 	
@@ -128,7 +129,7 @@ public class Game {
 			tower = towers.get(i);
 			tower.runInterval();
 			for ( int j = 0; j < enemies.size(); j++ ) {
-				enemy = enemies.get(j);
+				enemy = enemies.get(j);	
 				if ( tower.detect(enemy) ) {
 					/* create bullet */
 					Bullet newBullet = new Bullet(BitmapFactory.decodeResource(Panel.getObject().getResources(), R.drawable.bullet), tower.getX() + tower.getWidth() / 2, tower.getY() + tower.getHeight() / 2, tower.getBulletSpeed(), tower.getAttack(), enemy);
