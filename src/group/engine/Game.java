@@ -10,6 +10,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Point;
 import android.util.Log;
+import audio.AudioManager;
 import group.objects.*;
 import group.objects.Object;
 
@@ -134,6 +135,30 @@ public class Game {
 					/* create bullet */
 					Bullet newBullet = new Bullet(BitmapFactory.decodeResource(Panel.getObject().getResources(), R.drawable.bullet), tower.getX() + tower.getWidth() / 2, tower.getY() + tower.getHeight() / 2, tower.getBulletSpeed(), tower.getAttack(), enemy);
 					bullets.add(newBullet);
+					//TODO play sound
+					switch (tower.getType())
+					{
+					case 0:
+						AudioManager.playSE_shoot_water();
+						break;
+					case 1:
+						AudioManager.playSE_shoot_wind();
+						break;
+					case 2:
+						AudioManager.playSE_shoot_fire();
+						break;
+					case 3:
+						AudioManager.playSE_shoot_beam();
+						break;
+					case 4:
+						AudioManager.playSE_shoot_electricity();
+						break;
+					case 5:
+						AudioManager.playSE_shoot_raser();
+						break;
+					default:
+						break;
+					}
 				}
 			}
 		}

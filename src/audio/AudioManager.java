@@ -17,7 +17,13 @@ public class AudioManager
 	
 	private static Context currentContext;
 	private static MediaPlayer bgmPlayer;
-	private static MediaPlayer sePlayer;
+	private static MediaPlayer sePlayer1;
+	private static MediaPlayer sePlayer2;
+	private static MediaPlayer sePlayer3;
+	private static MediaPlayer sePlayer4;
+	private static MediaPlayer sePlayer5;
+	private static MediaPlayer sePlayer6;
+	private static MediaPlayer sePlayer7;
 	
 	public AudioManager()
 	{
@@ -37,13 +43,72 @@ public class AudioManager
 		}
 	}
 	
+	private static void releasePlayer_SE1()
+	{
+		if(sePlayer1 != null)
+		{
+			sePlayer1.release();
+			sePlayer1 = null;
+		}
+	}
+	private static void releasePlayer_SE2()
+	{
+		if(sePlayer2 != null)
+		{
+			sePlayer2.release();
+			sePlayer2 = null;
+		}
+	}
+	private static void releasePlayer_SE3()
+	{
+		if(sePlayer3 != null)
+		{
+			sePlayer3.release();
+			sePlayer3 = null;
+		}
+	}
+	private static void releasePlayer_SE4()
+	{
+		if(sePlayer4 != null)
+		{
+			sePlayer4.release();
+			sePlayer4 = null;
+		}
+	}
+	private static void releasePlayer_SE5()
+	{
+		if(sePlayer5 != null)
+		{
+			sePlayer5.release();
+			sePlayer5 = null;
+		}
+	}
+	private static void releasePlayer_SE6()
+	{
+		if(sePlayer6 != null)
+		{
+			sePlayer6.release();
+			sePlayer6 = null;
+		}
+	}
+	private static void releasePlayer_SE7()
+	{
+		if(sePlayer7 != null)
+		{
+			sePlayer7.release();
+			sePlayer7 = null;
+		}
+	}
+	
 	public static void releasePlayer_SE()
 	{
-		if(sePlayer != null)
-		{
-			sePlayer.release();
-			sePlayer = null;
-		}
+		releasePlayer_SE1();
+		releasePlayer_SE2();
+		releasePlayer_SE3();
+		releasePlayer_SE4();
+		releasePlayer_SE5();
+		releasePlayer_SE6();
+		releasePlayer_SE7();
 	}
 	
 	public static void releaseAll()
@@ -78,58 +143,58 @@ public class AudioManager
 	
 	public static void playSE_shoot_fire()
 	{
-		releasePlayer_SE();
-		sePlayer = MediaPlayer.create(currentContext, R.raw.shoot_fire);
-		sePlayer.setLooping(false);
-		sePlayer.start();
+		releasePlayer_SE1();
+		sePlayer1 = MediaPlayer.create(currentContext, R.raw.shoot_fire);
+		sePlayer1.setLooping(false);
+		sePlayer1.start();
 	}
 	
 	public static void playSE_shoot_water()
 	{
-		releasePlayer_SE();
-		sePlayer = MediaPlayer.create(currentContext, R.raw.shoot_water);
-		sePlayer.setLooping(false);
-		sePlayer.start();
+		releasePlayer_SE2();
+		sePlayer2 = MediaPlayer.create(currentContext, R.raw.shoot_water);
+		sePlayer2.setLooping(false);
+		sePlayer2.start();
 	}
 	
 	public static void playSE_shoot_wind()
 	{
-		releasePlayer_SE();
-		sePlayer = MediaPlayer.create(currentContext, R.raw.shoot_wind);
-		sePlayer.setLooping(false);
-		sePlayer.start();
+		releasePlayer_SE3();
+		sePlayer3 = MediaPlayer.create(currentContext, R.raw.shoot_wind);
+		sePlayer3.setLooping(false);
+		sePlayer3.start();
 	}
 	
 	public static void playSE_shoot_electricity()
 	{
-		releasePlayer_SE();
-		sePlayer = MediaPlayer.create(currentContext, R.raw.shoot_electricity);
-		sePlayer.setLooping(false);
-		sePlayer.start();
+		releasePlayer_SE4();
+		sePlayer4 = MediaPlayer.create(currentContext, R.raw.shoot_electricity);
+		sePlayer4.setLooping(false);
+		sePlayer4.start();
 	}
 	
 	public static void playSE_shoot_beam()
 	{
-		releasePlayer_SE();
-		sePlayer = MediaPlayer.create(currentContext, R.raw.shoot_beam);
-		sePlayer.setLooping(false);
-		sePlayer.start();
+		releasePlayer_SE5();
+		sePlayer5 = MediaPlayer.create(currentContext, R.raw.shoot_beam);
+		sePlayer5.setLooping(false);
+		sePlayer5.start();
 	}
 	
 	public static void playSE_shoot_raser()
 	{
-		releasePlayer_SE();
-		sePlayer = MediaPlayer.create(currentContext, R.raw.shoot_raser);
-		sePlayer.setLooping(false);
-		sePlayer.start();
+		releasePlayer_SE6();
+		sePlayer6 = MediaPlayer.create(currentContext, R.raw.shoot_raser);
+		sePlayer6.setLooping(false);
+		sePlayer6.start();
 	}
 	
 	public static void playSE_life_hurt()
 	{
-		releasePlayer_SE();
-		sePlayer = MediaPlayer.create(currentContext, R.raw.life_hurt);
-		sePlayer.setLooping(false);
-		sePlayer.start();
+		releasePlayer_SE7();
+		sePlayer7 = MediaPlayer.create(currentContext, R.raw.life_hurt);
+		sePlayer7.setLooping(false);
+		sePlayer7.start();
 	}
 	
 	public static void playSE_victory()
@@ -139,9 +204,9 @@ public class AudioManager
 		{
 			bgmPlayer.pause();
 		}*/
-		releasePlayer_SE();
-		sePlayer = MediaPlayer.create(currentContext, R.raw.victory);
-		sePlayer.setLooping(false);
+		releasePlayer_SE7();
+		sePlayer7 = MediaPlayer.create(currentContext, R.raw.victory);
+		sePlayer7.setLooping(false);
 		/*sePlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener()
 		{
 			@Override
@@ -150,14 +215,14 @@ public class AudioManager
 				bgmPlayer.start();
 			}
 		});*/
-		sePlayer.start();
+		sePlayer7.start();
 	}
 	
 	public static void playSE_gameover()
 	{
-		releasePlayer_SE();
-		sePlayer = MediaPlayer.create(currentContext, R.raw.gameover);
-		sePlayer.setLooping(false);
-		sePlayer.start();
+		releasePlayer_SE7();
+		sePlayer7 = MediaPlayer.create(currentContext, R.raw.gameover);
+		sePlayer7.setLooping(false);
+		sePlayer7.start();
 	}
 }

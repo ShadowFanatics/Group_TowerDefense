@@ -4,13 +4,30 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import audio.AudioManager;
 
 public class MainActivity extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.menuactivity);	
+		setContentView(R.layout.menuactivity);
+	}
+	
+	@Override
+	protected void onResume()	//TODO
+	{
+		super.onResume();
+		
+		AudioManager.setContext(this);
+		AudioManager.playBGM_title();
+	}
+	
+	@Override
+	protected void onDestroy()	//TODO
+	{
+		super.onDestroy();
+		AudioManager.releaseAll();
 	}
 	
 	public void start(View view)//開始遊戲
@@ -31,6 +48,4 @@ public class MainActivity extends Activity {
 	{
 		this.finish();
 	}
-	
-	
 }
