@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/record_listview_item"
+    android:layout_width="fill_parent"
+    android:layout_height="50.5dip"
+    android:layout_marginLeft="5dp"
+    android:layout_marginRight="5dp"
+    android:gravity="center"
+    android:background="@drawable/pre"
+     >
+
+    <LinearLayout
+        android:id="@+id/reocord_item"
+        android:layout_width="fill_parent"
+        android:layout_height="60dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp" 
+        android:paddingTop="0dp"
+        android:paddingBottom="0dp"
+        
+        >
+
+        <TextView
+            android:id="@+id/record_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="4"
+            android:gravity="center"
+            android:text="PlayerName"
+            android:textColor="@android:color/white"
+            android:paddingLeft="4dp"
+            android:textSize="@dimen/text_size18" />
+
+        <TextView
+            android:id="@+id/record_time"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="10:00"
+            android:singleLine="true"
+            android:textColor="@android:color/white"
+            android:gravity="center"
+            android:textSize="@dimen/text_size18" />
+        
+        <TextView
+            android:id="@+id/record_wave"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:text="YEEEEEEEEE"
+            android:singleLine="true"
+            android:textColor="@android:color/white"
+            android:gravity="center"
+            android:textSize="@dimen/text_size18" />
+        
+		
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_weight="2">
+
+            <TextView
+                android:id="@+id/record_money"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="獲得金錢"
+                android:gravity="center"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/text_size18" />
+            
+            <ImageView
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:contentDescription="@string/image_description"
+                android:background="@drawable/yuan_logo" />
+        </LinearLayout>
+        <!--
+        <ImageView
+            android:layout_gravity="center"
+            android:id="@+id/record_statu"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/charge_status_freeze"
+            android:contentDescription="@string/image_description" 
+            />
+        -->
+    </LinearLayout>
+
+</RelativeLayout>

@@ -1,6 +1,7 @@
 package group.objects;
 
 import android.graphics.Bitmap;
+import android.graphics.Rect;
 import android.util.Log;
 
 public class Object {
@@ -44,4 +45,7 @@ public class Object {
 		return height;
 	}
 	
+	public Object clone() {
+		return new Object(sprite.getBitmap(), x, y);
+	}
 }

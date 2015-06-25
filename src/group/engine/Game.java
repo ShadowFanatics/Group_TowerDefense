@@ -10,6 +10,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Point;
 import android.util.Log;
+import audio.AudioManager;
 import group.objects.*;
 import group.objects.Object;
 
@@ -34,6 +35,7 @@ public class Game {
 		stage = new Stage(0);
 		timer = new Timer();
 		timer.schedule(task, 0,1000);
+		
 	}
 	
 	public void runGame() {
@@ -45,18 +47,18 @@ public class Game {
 	
 	public void createEnemy(int id,int location, int type, int path) {
 		Point createPoint = stage.getStartPoint(location);
-		float blockSize = Panel.getObject().getBlockSize();
+		float[] blockSize = Panel.getObject().getBlockSize();
 		float offestOfMapX = Panel.getObject().getOffestOfMapX();
 		float offestOfMapY = Panel.getObject().getOffestOfMapY();
-		Enemy newEnemy = new Enemy(BitmapFactory.decodeResource(Panel.getObject().getResources(), R.drawable.ic_launcher), offestOfMapX + createPoint.x*blockSize, offestOfMapY + createPoint.y*blockSize, id, type, path);
+		Enemy newEnemy = new Enemy(BitmapFactory.decodeResource(Panel.getObject().getResources(), R.drawable.ic_launcher), offestOfMapX + createPoint.x*blockSize[0], offestOfMapY + createPoint.y*blockSize[1], id, type, path);
 		enemies.add(newEnemy);
 	}
 	
 	public void createTower(int tower_type, int x, int y) {
-		float blockSize = Panel.getObject().getBlockSize();
+		float[] blockSize = Panel.getObject().getBlockSize();
 		float offestOfMapX = Panel.getObject().getOffestOfMapX();
 		float offestOfMapY = Panel.getObject().getOffestOfMapY();
-		Tower newtower = new Tower(BitmapFactory.decodeResource(Panel.getObject().getResources(), R.drawable.ic_launcher), offestOfMapX + x*blockSize, offestOfMapY + y*blockSize, tower_type);
+		Tower newtower = new Tower(BitmapFactory.decodeResource(Panel.getObject().getResources(), TowerTypeList.images[tower_type]), offestOfMapX + x*blockSize[0], offestOfMapY + y*blockSize[1], tower_type);
 		towers.add(newtower);
 	}
 	
@@ -86,8 +88,8 @@ public class Game {
 		for ( int i = 0; i < enemies.size(); i++ ) {
 			movingEnemy = enemies.get(i);
 			Point nextLocation = stage.getEnemyPath(movingEnemy.getWalkPathID()).getNextLocation(movingEnemy.getHadGoPath());
-			float offestX = nextLocation.x * Panel.getObject().getBlockSize() + Panel.getObject().getOffestOfMapX() - movingEnemy.getX();
-			float offestY = nextLocation.y * Panel.getObject().getBlockSize() + Panel.getObject().getOffestOfMapY() - movingEnemy.getY();
+			float offestX = nextLocation.x * Panel.getObject().getBlockSize()[0] + Panel.getObject().getOffestOfMapX() - movingEnemy.getX();
+			float offestY = nextLocation.y * Panel.getObject().getBlockSize()[1] + Panel.getObject().getOffestOfMapY() - movingEnemy.getY();
 			if ( offestX == 0.0 && offestY == 0 ) {
 				if ( movingEnemy.getHadGoPath() < stage.getEnemyPath(movingEnemy.getWalkPathID()).getLength() - 1 ) {
 					movingEnemy.addHadGoPath();
@@ -128,11 +130,35 @@ public class Game {
 			tower = towers.get(i);
 			tower.runInterval();
 			for ( int j = 0; j < enemies.size(); j++ ) {
-				enemy = enemies.get(j);
+				enemy = enemies.get(j);	
 				if ( tower.detect(enemy) ) {
 					/* create bullet */
 					Bullet newBullet = new Bullet(BitmapFactory.decodeResource(Panel.getObject().getResources(), R.drawable.bullet), tower.getX() + tower.getWidth() / 2, tower.getY() + tower.getHeight() / 2, tower.getBulletSpeed(), tower.getAttack(), enemy);
 					bullets.add(newBullet);
+					//TODO play sound
+					switch (tower.getType())
+					{
+					case 0:
+						AudioManager.playSE_shoot_water();
+						break;
+					case 1:
+						AudioManager.playSE_shoot_wind();
+						break;
+					case 2:
+						AudioManager.playSE_shoot_fire();
+						break;
+					case 3:
+						AudioManager.playSE_shoot_beam();
+						break;
+					case 4:
+						AudioManager.playSE_shoot_electricity();
+						break;
+					case 5:
+						AudioManager.playSE_shoot_raser();
+						break;
+					default:
+						break;
+					}
 				}
 			}
 		}
@@ -158,5 +184,9 @@ public class Game {
 			default:
 				return null;
 		}
+	}
+	
+	public Bitmap getBackground() {
+		return stage.getBackground();
 	}
 }

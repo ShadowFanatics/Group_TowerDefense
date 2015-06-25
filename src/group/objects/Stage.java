@@ -13,37 +13,37 @@ import group.engine.Panel;
 
 public class Stage {
 	private Map mapData;
-	private int[] pathImage = {R.drawable.map_block,R.drawable.map_path};
+	private int[] pathImage = {R.drawable.tower_block,R.drawable.block};
 	private Bitmap[] pathBitmap;
 	private Point[] startPoints;
 	private EnemyPath[] enemyPaths;
-	private Enemy[] enemies;
 	private int enemyIdCount = 0;
+	private Bitmap backgroundBitmap;
+	
 	public Stage(int stageID) {
 		switch (stageID) {
 			default:
 				mapData = new Map(0);
+				backgroundBitmap = BitmapFactory.decodeResource(Panel.getObject().getResources(), R.drawable.back);
 				pathBitmap = new Bitmap[pathImage.length];
 				for ( int i = 0; i < pathImage.length; i++ ) {
 					pathBitmap[i] = BitmapFactory.decodeResource(Panel.getObject().getResources(), pathImage[i]);
 				}
-				startPoints = new Point[1];
-				startPoints[0] = new Point();
-				startPoints[0].x = 6;
-				startPoints[0].y = 0;
-				enemies = new Enemy[1];
-				enemyPaths = new EnemyPath[1];
-				enemyPaths[0] = new EnemyPath(new Point[]{new Point(6,1),new Point(1,1),new Point(1,6),new Point(3,6),new Point(3,3),new Point(5,3),new Point(5,6),new Point(7,6)});
+				startPoints = new Point[2];
+				startPoints[0] = new Point(0,1);
+				startPoints[1] = new Point(0,11);
+				enemyPaths = new EnemyPath[2];
+				enemyPaths[0] = new EnemyPath(new Point[]{new Point(0,1),new Point(13,1),new Point(13,6),new Point(6,6),new Point(6,3),new Point(2,3),new Point(2,9),new Point(12,9),new Point(12,11),new Point(14,11)});
+				enemyPaths[1] = new EnemyPath(new Point[]{new Point(0,11),new Point(9,11),new Point(9,3),new Point(2,3),new Point(2,9),new Point(12,9),new Point(12,11),new Point(14,11)});
 				break;
 		}
 	}
 	
 	public void runStage(int time) {
-		if ( time == 5 ) {
+		if ( time >= 3 ) {
 			EventHandler.sendEvent(new Event(Event.ENEMY_CREAT, enemyIdCount++, 0, 0, 0));
-			EventHandler.sendEvent(new Event(Event.BUILD_TOWER, 0, 2, 2));
+			EventHandler.sendEvent(new Event(Event.ENEMY_CREAT, enemyIdCount++, 0, 1, 1));
 		}
-		
 	}
 	
 	public int[][] getPath() {
@@ -64,5 +64,9 @@ public class Stage {
 		}
 		return startPoints[i];
 		
+	}
+	
+	public Bitmap getBackground() {
+		return backgroundBitmap;
 	}
 }

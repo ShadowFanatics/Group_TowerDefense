@@ -3,36 +3,54 @@ package group.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.view.View;
+import audio.AudioManager;
 
 public class MainActivity extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
+		setContentView(R.layout.menuactivity);
+	}
+	
+	@Override
+	protected void onResume()	//TODO
+	{
+		super.onResume();
+		
+		AudioManager.setContext(this);
+		AudioManager.playBGM_title();
+	}
+	
+	@Override
+	protected void onDestroy()	//TODO
+	{
+		super.onDestroy();
+		AudioManager.releaseAll();
+	}
+	
+	public void start(View view)//開始遊戲
+	{
 		Intent intent = new Intent();
 		intent.setClass(MainActivity.this, GameActivity.class);
 		startActivity(intent);
 	}
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.main, menu);
-		return true;
-	}
+	public void record(View view)//排行榜
+	{
+		Bundle bundle = new Bundle();
+		bundle.putBoolean("save", false);
+		
+		Intent intent = new Intent();
+		intent.putExtras(bundle);
 
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
-		int id = item.getItemId();
-		if (id == R.id.action_settings) {
-			return true;
-		}
-		return super.onOptionsItemSelected(item);
+		intent.setClass(MainActivity.this, RankActivity.class);
+		startActivity(intent);
+		this.finish();
+	}
+	public void quit(View view)//離開遊戲
+	{
+		this.finish();
 	}
 }
