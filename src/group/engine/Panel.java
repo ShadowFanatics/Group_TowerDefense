@@ -67,6 +67,7 @@ public class Panel extends SurfaceView implements SurfaceHolder.Callback {
 		super(context);
 		this.screeWidth = screeWidth;
 		this.screenHeight = screenHeight;
+		this.setKeepScreenOn(true);
 		Log.e("screeWidth",String.valueOf(screeWidth));
 		Log.e("screenHeight",String.valueOf(screenHeight));
 		res = context.getResources(); 
