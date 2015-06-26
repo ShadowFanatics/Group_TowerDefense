@@ -92,7 +92,7 @@ public class GameActivity extends Activity implements Runnable{
 	    				bundle.putString("name", player_name);
 	    				bundle.putString("score", String.valueOf(Game.getObject().getScore()));
 	    				bundle.putString("time", String.valueOf(Game.getObject().getTime()));
-	    				bundle.putString("money", String.valueOf(Game.getObject().getMoney()));
+	    				bundle.putString("money", String.valueOf(Game.getObject().getTotalMoney()));
 	    				intent.putExtras(bundle);
 	    				startActivity(intent);
 	    				finish();

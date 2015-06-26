@@ -48,14 +48,17 @@ public class Stage {
 		}
 		if ( wave != currentWave ) {
 			enemyCount++;
-			EventHandler.sendEvent(new Event(Event.ENEMY_CREAT, enemyIdCount++, (wave % EnemyTypeList.types), 0, 0));
-			EventHandler.sendEvent(new Event(Event.ENEMY_CREAT, enemyIdCount++, (wave % EnemyTypeList.types), 1, 1));
+			EventHandler.sendEvent(new Event(Event.ENEMY_CREAT, enemyIdCount++, (wave % 7), 0, 0));
+			EventHandler.sendEvent(new Event(Event.ENEMY_CREAT, enemyIdCount++, (wave % 7), 1, 1));
 			if ( enemyCount >= 5 ) {
 				currentWave++;
 			}
 		}
 		
 		if ( time % 91 == 3 ) {
+			if ( wave > 1 ) {
+				EventHandler.sendEvent(new Event(Event.ENEMY_CREAT, enemyIdCount++, 7, 0, 0));
+			}
 			for ( int i = 0; i < EnemyTypeList.types; i++ ) {
 				EnemyTypeList.HP[i] *= 1.5;
 			}

@@ -26,6 +26,7 @@ public class Game {
 	private int life = 50;
 	private int score = 0;
 	private int money = 10000;	//TODO
+	private int totalMoney = 10000;	//TODO
 	private Tower[][] buildedTower = new Tower[15][13];
 	
 	public static Game getObject() {
@@ -52,6 +53,7 @@ public class Game {
 		towerDetect();
 		bulletFly();
 		money++;
+		totalMoney++;
 		//Log.e("!!!", "!!!");
 		return (life == 0);
 	}
@@ -88,6 +90,7 @@ public class Game {
 					/* enemy die */
 					score += 10;
 					money += 30;	//TODO
+					totalMoney += 30;
 					enemies.remove(i);
 				}
 			}
@@ -118,6 +121,7 @@ public class Game {
 				}
 				else {
 					/* arrive end point*/
+					AudioManager.playSE_life_hurt();
 					life--;
 					enemies.remove(movingEnemy);
 				}
@@ -228,6 +232,10 @@ public class Game {
 	
 	public int getLife() {
 		return life;
+	}
+	
+	public int getTotalMoney() {
+		return totalMoney;
 	}
 	
 }
