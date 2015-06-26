@@ -151,7 +151,7 @@ public class Panel extends SurfaceView implements SurfaceHolder.Callback {
 				paint3.setColor(Color.BLACK);
 				paint3.setTextSize(screenHeight*(float)0.05);
 				canvas.drawText("Score: " + String.valueOf(Game.getObject().getScore()), screeWidth * (float)0.73, screenHeight * (float)0.75, paint3);
-				canvas.drawText("Time: " + String.valueOf(Game.getObject().getScore()), screeWidth * (float)0.73, screenHeight * (float)0.8, paint3);
+				canvas.drawText("Time: " + String.valueOf(Game.getObject().getTime()), screeWidth * (float)0.73, screenHeight * (float)0.8, paint3);
 				canvas.drawText("Money: " + String.valueOf(Game.getObject().getMoney()), screeWidth * (float)0.73, screenHeight * (float)0.85, paint3);
 				canvas.drawText("Life: " + String.valueOf(Game.getObject().getLife()), screeWidth * (float)0.73, screenHeight * (float)0.9, paint3);
 				
