@@ -64,7 +64,7 @@
                 android:layout_weight="4"
                 android:gravity="center"
                 android:text="姓名"
-                android:textColor="@android:color/white" />
+                android:textColor="#bbffa0" />
 
             <TextView
                 android:id="@+id/record_time"
@@ -74,7 +74,7 @@
                 android:layout_weight="2"
                 android:gravity="center"
                 android:text="時間"
-                android:textColor="@android:color/white" />
+                android:textColor="#bbffa0" />
 
             <TextView
                 android:id="@+id/record_wave"
@@ -84,7 +84,7 @@
                 android:layout_weight="3"
                 android:gravity="center"
                 android:text="關卡數"
-                android:textColor="@android:color/white" />
+                android:textColor="#bbffa0" />
 
             <TextView
                 android:id="@+id/record_money"
@@ -94,7 +94,7 @@
                 android:layout_weight="2"
                 android:gravity="center"
                 android:text="獲得金錢"
-                android:textColor="@android:color/white" />
+                android:textColor="#bbffa0" />
         </LinearLayout>
 
         <ListView

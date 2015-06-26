@@ -43,6 +43,7 @@ public class Game {
 	}
 	
 	public void clean() {
+		timer.cancel();
 		game = null;
 	}
 	

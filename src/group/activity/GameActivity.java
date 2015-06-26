@@ -9,6 +9,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.SurfaceHolder;
@@ -106,11 +107,19 @@ public class GameActivity extends Activity implements Runnable{
 	protected void onPause() {
 		super.onPause();
 		isPause = true;
-		game.clean();
-		scene.clean();
+		//scene.clean();
+		//game.clean();
 		AudioManager.releaseAll();
 		finish();
 	}
-
+	
+	
+	//返回鍵 鎖住 要返回 註解掉以下code
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		if (keyCode == KeyEvent.KEYCODE_BACK) {
+			return false;
+		}
+		return super.onKeyDown(keyCode, event);
+	}
 
 }
