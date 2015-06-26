@@ -25,7 +25,7 @@ public class Game {
 	private ArrayList<Bullet> bullets = new ArrayList<Bullet>();
 	private int life = 50;
 	private int score = 0;
-	private int money = 0;
+	private int money = 10000;	//TODO
 	private Tower[][] buildedTower = new Tower[15][13];
 	
 	public static Game getObject() {
@@ -82,7 +82,7 @@ public class Game {
 				if ( enemies.get(i).giveDemage(demage) ) {
 					/* enemy die */
 					score += 10;
-					money += 30;
+					money += 30;	//TODO
 					enemies.remove(i);
 				}
 			}
