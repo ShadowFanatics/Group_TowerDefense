@@ -42,6 +42,10 @@ public class Game {
 		
 	}
 	
+	public void clean() {
+		game = null;
+	}
+	
 	public boolean runGame() {
 		enemyMove();
 		towerDetect();

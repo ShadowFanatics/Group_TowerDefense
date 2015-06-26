@@ -63,6 +63,10 @@ public class Panel extends SurfaceView implements SurfaceHolder.Callback {
 		return panel;
 	}
 	
+	public void clean() {
+		panel = null;
+	}
+	
 	public Panel(Context context, int screeWidth, int screenHeight) {
 		super(context);
 		this.screeWidth = screeWidth;

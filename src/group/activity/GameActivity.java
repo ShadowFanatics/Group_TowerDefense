@@ -106,7 +106,8 @@ public class GameActivity extends Activity implements Runnable{
 	protected void onPause() {
 		super.onPause();
 		isPause = true;
-		
+		game.clean();
+		scene.clean();
 		AudioManager.releaseAll();
 		finish();
 	}
